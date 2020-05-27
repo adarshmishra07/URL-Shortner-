@@ -1,39 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css"
+        integrity="sha256-rFMLRbqAytD9ic/37Rnzr2Ycy/RlpxE5QH52h7VoIZo=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.css">
+    <link rel="icon" href="../public/img/ls.png">
     <title>Url Shortner</title>
 </head>
-<style> 
-.shorturl a{
-    color : green;
-}
-.shortmsg {
-    color :red;
-}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    body{
+        font-family: 'Montserrat', sans-serif;
+    }
+    .shorturl a {
+        color: green;
+    }
+
+    .shortmsg {
+        color: red;
+    }
+    .row-content{
+        line-height: 1.8;
+        padding: 40px 0;
+    }
+    .name {
+        color: #ff7700;
+        font-size: 1.2rem;
+    }
 </style>
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-warning" href="#">LongShort</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fas fa-home fa-s  px-1"></i>Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-info fa-s text-white px-1"></i>About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-donate fa-s text-white px-1"></i>Donate</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
-        <div class="shortmsg text-center"><%= msg %></div>
-        <form id="main" method="POST">
-            <div class="form-group">
-                <label for="link">Link</label>
-                <input type="text" class="form-control" name="url" id="url" placeholder="Enter link">
+        <div class="shortmsg text-center"><% if(msg.length > 1 ){%>
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><%= msg %></strong>
             </div>
-            <div class="form-group">
-                <label for="Alais">Alias</label>
-                <input type="text" class="form-control" name="id" id='ids' placeholder="Enter Alais">
+            <% } %></div>
+        <form id="main" method="POST" class="my-5  ">
+            <div class="form-group row align-items-center mb-3">
+                <label for="link" class="col-label col-md-2 text-white">
+                    <div class="btn btn-google"><i class="fas fa-link fa-s text-warning"></i></div>LINK
+                </label>
+                <div class="col-md-10"><input type="url" class="form-control" name="url" id="url"
+                        placeholder="http://example.com" required></div>
             </div>
-            <center><input type="submit" name="submit" class="btn btn-submit"></center>
+            <div class="form-group row align-items-center mb-5">
+                <label for="ids" class="col-label col-md-2  text-white">
+                    <div class="btn btn-google"><i class="fas fa-location-arrow fa-s text-warning"></i></div>ALIAS
+                </label>
+                <div class="input-group-prepend col-md-10">
+                    <div class="input-group-prepend"><span class="input-group-text">longshort.me/</span>
+                    </div>
+                    <div><input type="text" class="form-control" name="ids" id='ids' pattern="[A-Za-z0-9_-]*$"  title="Only use A-z , a-z or 0-9 ,_ and -"placeholder="Enter Alias" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-md-2 col-md-10"><input type="submit" name="submit"
+                        class="btn btn-submit btn-warning"></div>
+            </div>
 
         </form>
+
+        <div class="shorturl text-center">
+           <% if(short != ''){%>
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><a href="<%= short %>" target="blank" ><%= short %></a>
+            </div>
+            <% }%>
+            
+        </div>
+        <div class="row row-content align-items-center">
+            <div class="col-md-8 col-sm-12">
+                <h2>Why use LongShort ?</h2>
+                <p>
+                    LongShort is a free URL Shortner service .The main reason to use LongShort is, that it is absoluetly free you don't have to pay a single penny to shorten your url not today nor tommorow. <br>LongShort gives you freedom to choose your own Alias name so that you don't have to remember random alphabets or numbers.
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-12 text-center">
+                <img src="../public/img/0.00 $.svg" alt="0$" class="d-flex mx-auto">
+            </div>
+        </div>
+        <div class="row row-content justify-content-center text-center">
+            <div class="col-md-4 my-3">
+                <div class="icon"><i class="fa fa-dollar-sign fa-4x text-warning"></i></div>
+                <div class="name mt-2">Free</div>
+                <div class="description">LongShort provides free lifetime service</div>
+            </div>
+            <div class="col-md-4 my-3">
+                <div class="icon"><i class="fa fa-handshake fa-4x text-warning"></i></div>
+                <div class="name mt-2">Reliable</div>
+                <div class="description">Your links don't expire</div>
+            </div>
+            <div class="col-md-4 my-3">
+                <div class="icon"><i class="fa fa-location-arrow fa-4x text-warning"></i></div>
+                <div class="name mt-2">Custom Alias</div>
+                <div class="description">No need to remember random numbers and alphabets</div>
+            </div>
+        </div>
+        <div class="row row-content align-items-center">
+            <div class="col-md-8 order-last">
+                <h2>About LongShort</h2>
+                <p>
+                    LongShort is a simple and fast URL Shortner Service which allows you to shorten links from Facebook LinkedIn Youtube Google or any other website. The main aim is to provide free and quality short urls.
+                    <br>We don't store any user data other than long url.
+                </p>
+            </div>
+            <div class="col-md-4 text-center order-first">
+                <img src="../public/img/ls.png" class="d-flex mx-auto img-thumbnail" alt="Logo">
+            </div>
+        </div>
+        <div class="row row-content align-items-center justify-content-center">
+            <div class="col-12 text-center"><h4>Buy Team LongShort A Coffee</h4>
+                <button class="btn btn-warning btn-lg my-3"><i class="fa fa-donate text-white"></i> Donate</button>
+            </div>
+        </div>
+        <div class="row row-content align-items-center justify-content-around">
+            <div class="col-12"><h4>Credits</h4>
+                API Created and Managed by <strong ><a class="text-warning" href="https://www.linkedin.com/in/harshalkondke/" target="blank"> Harshal Kondke</a></strong><br>
+                WebPage Created and Managed by  <strong ><a class="text-warning" href="https://www.linkedin.com/in/adarsh-mishra-38a6a713a/" target="blank"> Adarsh Mishra</a></strong> <br>
+            </div>
+        </div>
+
     </div>
-    <div class="shorturl text-center"><a href="<%= short %>"><%= short %></a></div>
+<footer>
+    <div class="container">
+        <div class="credits text-center mb-3">Copyright &copy; LongShort 2020</div>
+    </div>
+</footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
 
-
+</html>
