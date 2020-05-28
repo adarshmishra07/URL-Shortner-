@@ -19,9 +19,19 @@ app.use(express.urlencoded({
 app.get('/', (req, res) => {
     res.render('index', {
         short: '',
-        msg: ' '
+        msg: ''
     });
 })
+
+
+app.get('/:ids' ,(req,res)=>{
+    console.log(req.params.ids);
+
+    res.redirect("https://i1oqepnvgj.execute-api.us-east-1.amazonaws.com/prod/"+req.params.ids)
+    
+
+})
+
 
 app.post('/', (req, res) => {
     var error = '';
@@ -44,7 +54,7 @@ app.post('/', (req, res) => {
     }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
-            short = 'https://i1oqepnvgj.execute-api.us-east-1.amazonaws.com/prod/' + data.id;
+            short = 'https://longshort.me/' + data.id;
             res.render('index', {
                 short,
                 msg
