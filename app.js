@@ -54,7 +54,7 @@ app.post('/', (req, res) => {
     }, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
-            short = 'https://longshort.me/' + data.id;
+            short = 'http://longshort.me/' + data.id;
             res.render('index', {
                 short,
                 msg
@@ -70,8 +70,7 @@ app.post('/', (req, res) => {
     })
 
 })
-
-
+    
 app.get('*', function (req, res) {
 
     res.status(404).redirect('public/404.html')
